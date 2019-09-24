@@ -110,7 +110,8 @@ class SingleEvaluator(Evaluator):
                 "component": dr.get_name(plugin),
                 "type": type_,
                 "key": key,
-                "details": r
+                "details": r,
+                "links": dr.get_delegate(plugin).links or {}
             }))
 
 

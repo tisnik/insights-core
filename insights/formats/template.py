@@ -71,6 +71,7 @@ class TemplateFormat(Formatter):
             name = dr.get_name(comp)
             rule_id = name.replace(".", "_")
             val = broker[comp]
+            links = dr.get_delegate(comp).links or {}
             self.rules.append({
                 "name": name,
                 "id": rule_id,
@@ -79,7 +80,8 @@ class TemplateFormat(Formatter):
                 "mod_doc": sys.modules[comp.__module__].__doc__ or "",
                 "rule_doc": comp.__doc__ or "",
                 "source_path": inspect.getabsfile(comp),
-                "datasources": sorted(set(self.get_datasources(comp, broker)))
+                "datasources": sorted(set(self.get_datasources(comp, broker))),
+                "links": links
             })
 
     def preprocess(self):
