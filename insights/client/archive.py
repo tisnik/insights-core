@@ -128,6 +128,8 @@ class InsightsArchive(object):
             #   because all the individual archives are in there
             self.tmp_dir if not full_archive else self.archive_dir)),
             stderr=subprocess.PIPE)
+        if self.compressor not in ["gz", "xz", "bz2", "none"]:
+            logger.error("The compressor %s is not supported.  Using default", self.compressor)
         self.delete_archive_dir()
         logger.debug("Tar File Size: %s", str(os.path.getsize(tar_file_name)))
         return tar_file_name
